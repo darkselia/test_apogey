@@ -1,24 +1,18 @@
 :root {
-    color-scheme: dark;
-    --color-page-bg: #f7f6f5;
+    color-scheme: light;
+    --color-bg: #f7f6f5;
     --color-primary: #ff3001;
     --color-primary-accent: #ff7043;
     --color-primary-soft: #ffefe9;
-    --color-primary-hover: #ffd8c4;
     --color-white: #ffffff;
-    --color-dark: #1f1f24;
-    --color-text-soft: #6b6e7c;
-    --color-tab-text: #707070;
+    --color-text: #1f1f24;
     --color-text-muted: #6a6d7a;
-    --color-subtitle: #4b4e5f;
     --color-chip-text: #7d2b13;
     --color-article-bg: #fff8f5;
     --color-panel-border: rgba(17, 17, 26, 0.05);
     --color-panel-border-strong: rgba(17, 17, 26, 0.08);
     --color-tab-bg: #f1f0ef;
-    --color-tab-border: rgba(0, 0, 0, 0.05);
-    --color-surface-tint: #fdfcfc;
-    --color-visual-bg: #fdfafa;
+    --color-surface: #fdfbfa;
 }
 
 * {
@@ -28,8 +22,8 @@
 body {
     margin: 0;
     font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: #f7f6f5;
-    color: #1f1f24;
+    background: var(--color-bg);
+    color: var(--color-text);
 }
 
 #app {

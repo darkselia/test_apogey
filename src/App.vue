@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from 'vue';
 import ClientsTab from './components/ClientsTab.vue';
-import TalentTab from './components/TalentTab.vue';
+
 
 const tabs = [
   {id: 'clients', label: 'Для клиентов'},
@@ -37,6 +37,9 @@ const activeTab = ref('clients');
     </header>
 
     <main>
+      <Transition name="fade-slide" mode="out-in">
+        <ClientsTab v-if="activeTab === 'clients'" />
+      </Transition>
     </main>
 
     <footer class="site-footer">
@@ -49,10 +52,12 @@ const activeTab = ref('clients');
 
 <style scoped>
 .page {
-  padding: clamp(1rem, 3vw, 2.5rem);
+  padding: clamp(16px, 3vw, 40px);
   display: flex;
   flex-direction: column;
-  gap: clamp(1rem, 2vw, 1.5rem);;
+  gap: clamp(16px, 2vw, 24px);
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-primary-soft) 20%, var(--color-primary-accent)
+  100%);
 }
 
 .header {
@@ -60,13 +65,13 @@ const activeTab = ref('clients');
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .header__logo {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .logo-full {
@@ -76,8 +81,8 @@ const activeTab = ref('clients');
 
 .header__tagline span {
   display: block;
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
+  font-size: 14px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
@@ -89,7 +94,7 @@ const activeTab = ref('clients');
   display: inline-flex;
   background: var(--color-tab-bg);
   border-radius: 999px;
-  padding: 0.3rem;
+  padding: 4px;
   border: 1px solid var(--color-tab-border);
 }
 
@@ -97,9 +102,9 @@ const activeTab = ref('clients');
   border: none;
   background: transparent;
   color: var(--color-tab-text);
-  padding: 0.6rem 1.6rem;
+  padding: 9px 25px;
   border-radius: 999px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: color 0.3s ease, background 0.3s ease;
@@ -112,19 +117,35 @@ const activeTab = ref('clients');
 }
 
 .site-footer {
-  margin-top: 1rem;
+  margin-top: 16px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   text-align: center;
-  color: var(--color-text-muted);
-  gap: 0.35rem;
-  font-size: 0.95rem;
+  gap: 5px;
+  font-size: 15px;
 }
 
 .site-footer a {
-  color: var(--color-text-muted);
+  color: var(--color-text);
   text-decoration: none;
 }
 
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+@media (width <= 800px) {
+  .header__tabs {
+    width: 100%;
+    justify-content: space-around;
+  }
+}
 </style>
