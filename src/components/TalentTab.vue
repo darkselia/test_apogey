@@ -1,6 +1,7 @@
 <script setup>
 import CtaButton from './CtaButton.vue';
 import {ref} from 'vue';
+import TalentForm from "@/components/TalentForm.vue";
 
 const showTalentModal = ref(false);
 
@@ -134,7 +135,7 @@ const content = {
         <p class="panel__subtitle">{{ content.description }}</p>
         <p class="panel__promise">{{ content.promise }}</p>
         <div class="panel__cta">
-          <CtaButton :label="content.ctaPrimary"/>
+          <CtaButton :label="content.ctaPrimary" @click="showTalentModal = true"/>
           <CtaButton :label="content.ctaSecondary" variant="secondary"/>
         </div>
         <div class="panel__stats">

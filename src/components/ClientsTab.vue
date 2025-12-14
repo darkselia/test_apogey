@@ -1,5 +1,13 @@
 <script setup>
 import CtaButton from './CtaButton.vue';
+import {ref} from 'vue';
+import ClientForm from "@/components/ClientForm.vue";
+
+const showRequestModal = ref(false);
+
+const handleSubmit = (payload) => {
+  console.log('Client request submitted', payload);
+};
 
 const content = {
   eyebrow: '№ 1 техподдержка 1С для бухгалтера госучреждения',
@@ -90,7 +98,7 @@ const content = {
         <p class="panel__subtitle">{{ content.subtitle }}</p>
         <p class="panel__promise">{{ content.promise }}</p>
         <div class="panel__cta">
-          <CtaButton :label="content.ctaPrimary" />
+          <CtaButton :label="content.ctaPrimary" @click="showRequestModal = true" />
           <CtaButton :label="content.ctaSecondary" variant="secondary" />
         </div>
         <div class="panel__stats">
@@ -100,7 +108,7 @@ const content = {
           </div>
         </div>
       </article>
-      <div class="surface-card surface-card--visual">
+      <div class="panel_image">
         <img
             src="/src/assets/clients.webp"
             alt="Иллюстрация команды поддержки Апогей, помогающей главбуху"
@@ -147,7 +155,7 @@ const content = {
       <ul class="modules__tags list-plain">
         <li v-for="item in content.showcaseItems" :key="item" class="tag">{{ item }}</li>
       </ul>
-      <CtaButton :label="content.ctaPrimary" />
+      <CtaButton :label="content.ctaPrimary" @click="showRequestModal = true" />
     </section>
 
     <section class="knowledge">
@@ -166,19 +174,20 @@ const content = {
         </article>
       </div>
     </section>
+
+    <ClientForm
+        :open="showRequestModal"
+        @update:open="showRequestModal = $event"
+        @submit="handleSubmit"
+    />
   </section>
 </template>
 
 <style scoped>
 .panel {
-  background: var(--color-white);
-  border: 1px solid var(--color-panel-border);
-  border-radius: 32px;
-  padding: clamp(24px, 3vw, 48px);
   display: flex;
   flex-direction: column;
-  gap: clamp(24px, 3vw, 40px);
-  box-shadow: 0 30px 60px rgba(18, 19, 26, 0.08);
+  gap: 32px;
 }
 
 .panel__block {
@@ -247,17 +256,20 @@ const content = {
 .surface-card {
   background: var(--color-surface);
   border: 1px solid var(--color-panel-border);
-  border-radius: 24px;
-  padding: 24px;
+  border-radius: 28px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.surface-card--visual {
+.panel_image {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.surface-card--visual img {
+.panel_image img {
   max-width: 100%;
   border-radius: 18px;
 }
@@ -314,7 +326,6 @@ const content = {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin-top: 32px;
 }
 
 .review-link {

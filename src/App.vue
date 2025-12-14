@@ -1,11 +1,12 @@
 <script setup>
 import {ref} from 'vue';
 import ClientsTab from './components/ClientsTab.vue';
+import TalentTab from './components/TalentTab.vue';
 
 
 const tabs = [
   {id: 'clients', label: 'Для клиентов'},
-  {id: 'talent', label: 'Для сотрудников'},
+  {id: 'talent', label: 'Для соискателей'},
 ];
 
 const activeTab = ref('clients');
@@ -39,6 +40,7 @@ const activeTab = ref('clients');
     <main>
       <Transition name="fade-slide" mode="out-in">
         <ClientsTab v-if="activeTab === 'clients'" />
+        <TalentTab v-else />
       </Transition>
     </main>
 
@@ -56,7 +58,7 @@ const activeTab = ref('clients');
   display: flex;
   flex-direction: column;
   gap: clamp(16px, 2vw, 24px);
-  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-primary-soft) 20%, var(--color-primary-accent)
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-primary-soft) 30%, var(--color-primary-accent)
   100%);
 }
 
